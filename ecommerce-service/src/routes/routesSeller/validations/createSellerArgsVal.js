@@ -1,4 +1,4 @@
-const { validateByDict } = require("../../utils/iterations");
+const { dinamycVal } = require("../../globalValidations/dinamycArgsValidation");
 const { errMessages, errSellerMsg } = require("../../utils/messages");
 
 function createSellerV(data, res){
@@ -11,30 +11,5 @@ function createSellerV(data, res){
 
 }
 
-// Valida argumentos dinamicamente
-function dinamycVal(data, res, validArgs, validQTY, errMsgs){
-    const dict = JSON.parse(JSON.stringify(data));
-    const argsQty = Object.keys(dict).length;
-    let flagErr = false;
-
-    if (argsQty === 0) {
-        flagErr = true;
-        res.status(400).send({
-            error: errMsgs.noArgs,
-        });
-    } else if (argsQty !== validQTY) {
-        flagErr = true;
-        res.status(400).send({
-            error: errMsgs.wrongArgs,
-        });
-
-    // validamos que los argumentos sean los permitidos y no sean vacios o de otro typeof
-    } else {
-            
-            flagErr = validateByDict(res, dict, validArgs, flagErr, errMsgs);
-    }
-    return flagErr;
-
-}
 
 module.exports = { createSellerV };
