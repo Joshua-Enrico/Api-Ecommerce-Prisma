@@ -19,6 +19,12 @@ async function searchAdmin(req, res) {
                     { email: { contains: search } },
                   ],
             },
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              active: true,
+            }
           })
           .then((admins) => {
             admins.length > 0
