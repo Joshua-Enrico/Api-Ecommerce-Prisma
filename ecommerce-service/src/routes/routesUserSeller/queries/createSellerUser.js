@@ -1,11 +1,10 @@
 var CryptoJS = require("crypto-js");// Libreria para encriptamiento de contraseñas
 const { PrismaClient } = require('@prisma/client'); // ORM
-const { seller, selleruser } = new PrismaClient();
+const { selleruser } = new PrismaClient();
 
 async function createSellerUser(req, res) {
 
     const { name, email, password, sellerId} = req;
-    console.log(name, email, password, sellerId);
 
     await selleruser.create({
         data: {
@@ -92,6 +91,7 @@ async function createSellerUser(req, res) {
     //         code: "server_error",
     //     })
     // })
+
 }
 
 module.exports = { createSellerUser };
