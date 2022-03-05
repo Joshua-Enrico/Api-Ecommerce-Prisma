@@ -1,15 +1,16 @@
 const { checkUserExistance } = require('../globalQueries/checkUserExistance');
-const { createArgumentsV } = require('../globalValidations/createArgsValidation');
+const { dinamycVal } = require('../globalValidations/dinamycArgsValidation');
+const { errUsrSellerMsg } = require('../utils/messages');
 const { createSellerUser } = require('./queries/createSellerUser');
 
 const router = require('express').Router();
 
 
-// Crear Usuario
+// Crear Usuario,
 router.post('/', async (req, res) => {
-    
-    const err = createArgumentsV(req, res);// Valida los argumentos
-    if (!err.flagErr) {
+    const validArgs = [ "sellerId", "name", "password", "email"]
+    const err = dinamycVal(req.body, res, validArgs, 4, errUsrSellerMsg, false);// Valida los argumentos
+    if (!err) {
         const flag = await checkUserExistance(req.body, res);// Verifica que el name y email no existan
         flag.isValid && createSellerUser(req.body, res); // Si no existe el name y email, crea el admin
     }
