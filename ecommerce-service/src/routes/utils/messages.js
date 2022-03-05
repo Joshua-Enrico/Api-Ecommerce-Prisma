@@ -24,4 +24,12 @@ const errSellerMsg = {
     wrongActiveType: 'active value is not a boolean',
 }
 
-module.exports = { errMessages, errUpdateMsg, errSellerMsg };
+const errUsrSellerMsg = {
+    noArgs: 'No arguments were sent',
+    wrongArgs: 'Only four arguments permited : sellerId, name, email, password',
+    invalidArg: 'is not a valid argument valid, allowed arguments are : sellerId, name, email, password',
+    wrongValue: 'value is empty or wrong type',
+    wrongEmail: 'is not a valid email',
+    wrongActiveType: 'active value is not a boolean',
+}
+module.exports = { errMessages, errUpdateMsg, errSellerMsg, errUsrSellerMsg };
