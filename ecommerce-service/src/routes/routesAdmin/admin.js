@@ -8,16 +8,18 @@ const { deleteAdmin } = require('./queries/deleteAdmin');
 const { getAllAdmins } = require('./queries/getAllAdmins');
 const { searchAdmin } = require('./queries/searchAdmin');
 const { updateAdmin } = require('./queries/updateAdmin');
-const { createArgumentsV } = require('../globalValidations/createArgsValidation');
 const { updateArgsV } = require('./validations/updateArgsValidation');
+const { errMessages } = require('../utils/messages');
+const { dinamycVal } = require('../globalValidations/dinamycArgsValidation');
 
 /*  Crea un nuevo admin, esta ruta esta protegida
     por el middleware de autenticacion
 */
 router.post('/',async (req, res) => {
 
-    const err = createArgumentsV(req, res);// Valida los argumentos
-    if (!err.flagErr) {
+    const validArgs = ["name", "email", "password"];
+    const err = dinamycVal(req.body, res, validArgs, 3, errMessages, false );// Valida los argumentos
+    if (!err) {
         const flag = await checkUserExistance(req.body, res);// Verifica que el name y email no existan
         flag.isValid && createUser(req.body, res); // Si no existe el name y email, crea el admin
     }
