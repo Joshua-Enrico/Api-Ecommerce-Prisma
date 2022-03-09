@@ -1,8 +1,8 @@
-const { validateByDict } = require("../utils/iterations");
+const { validateByDict, validateByDictProduct, validateByDictCart } = require("../utils/iterations");
 
 
 // Valida argumentos dinamicamente
-function dinamycVal(data, res, validArgs, validQTY, errMsgs, flag){
+function dinamycVal(data, res, validArgs, validQTY, errMsgs, flag, validationType){
     const dict = JSON.parse(JSON.stringify(data));
     const argsQty = Object.keys(dict).length;
     let flagErr = false;
@@ -20,10 +20,14 @@ function dinamycVal(data, res, validArgs, validQTY, errMsgs, flag){
 
     // validamos que los argumentos sean los permitidos y no sean vacios o de otro typeof
     } else {
-            
+            (validationType === "product") && 
+            (flagErr = validateByDictProduct(res, dict, validArgs, flagErr, errMsgs))
+        
+            validationType === "cart" ?
+            flagErr = validateByDictCart(res, dict, validArgs, flagErr, errMsgs) :
             flagErr = validateByDict(res, dict, validArgs, flagErr, errMsgs);
+            return flagErr;
     }
-    return flagErr;
 
 }
 

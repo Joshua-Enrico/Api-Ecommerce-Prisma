@@ -32,4 +32,52 @@ const errUsrSellerMsg = {
     wrongEmail: 'is not a valid email',
     wrongActiveType: 'active value is not a boolean',
 }
-module.exports = { errMessages, errUpdateMsg, errSellerMsg, errUsrSellerMsg };
+
+const errWarehouseMsg = {
+    noArgs: 'No arguments were sent',
+    wrongArgs: 'Only three arguments permited : name, address, sellerId',
+    invalidArg: 'is not a valid argument valid, allowed arguments are : name, address, sellerId',
+    wrongValue: 'value is empty or wrong type',
+    wrongEmail: 'is not a valid email',
+    wrongActiveType: 'active value is not a boolean',
+}
+
+const errUsrMsg = {
+    noArgs: 'No arguments were sent',
+    wrongArgs: 'Only four arguments permited : name, email, password, address',
+    invalidArg: 'is not a valid argument valid, allowed arguments are : name, email, password, address',
+    wrongValue: 'value is empty or wrong type',
+    wrongEmail: 'is not a valid email',
+    wrongActiveType: 'active value is not a boolean',
+}
+
+const errProductMsg = {
+    noArgs: 'No arguments were sent',
+    wrongArgs: 'Only four arguments permited : name, description, price, stock, warehouseId, sellerId',
+    invalidArg: 'is not a valid argument valid, allowed arguments are : name, description, price, stock, warehouseId, sellerId',
+    wrongValue: 'value is empty or wrong type',
+    wrongEmail: 'is not a valid email',
+    wrongActiveType: 'active value is not a boolean',
+}
+
+const errCartMsg = {
+    noArgs: 'No arguments were sent',
+    wrongArgs: 'Only four arguments permited : userId, sellerId, products, total',
+    invalidArg: 'is not a valid argument valid, allowed arguments are : userId, sellerId, products, total',
+    wrongValue: 'value is empty or wrong type',
+    wrongEmail: 'is not a valid email',
+    wrongActiveType: 'active value is not a boolean',
+}
+
+const errUpdateSellerMsg = {
+    noArgs: 'No arguments were sent',
+    wrongArgs: 'Only four arguments permited : name, description, address, userId',
+    invalidArg: 'is not a valid argument valid, allowed arguments are : name, description, address, userId',
+    wrongValue: 'value is empty or wrong type',
+    wrongEmail: 'is not a valid email',
+    wrongActiveType: 'active value is not a boolean',
+}
+
+module.exports = {  errMessages, errUpdateMsg, errSellerMsg,
+                    errUsrSellerMsg, errWarehouseMsg, errUsrMsg,
+                    errProductMsg, errCartMsg, errUpdateSellerMsg };

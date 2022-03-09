@@ -21,6 +21,7 @@ model admin {
   createdAt   DateTime @default(now()) 
   updatedAt   DateTime @updatedAt
   active      Boolean @default(true)
+  userType    String @db.VarChar(20) @default("admin")
 }
 
 // Tabla de empresas vendedoras
@@ -32,6 +33,7 @@ model seller {
   sellerusers     selleruser[]
   products        product[]
   warehouses      warehouse[]
+  carts           cart[]
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   deactivatedAt   DateTime?
@@ -51,6 +53,7 @@ model selleruser {
   deletedAt       DateTime?
   deactivatedAt   DateTime?
   active          Boolean @default(true)
+  userType        String @db.VarChar(20) @default("selleruser")
 }
 
 
@@ -92,12 +95,14 @@ model user {
   name            String @db.VarChar(60) @unique
   email           String @db.VarChar(254) @unique
   password        String @db.VarChar(65)
+  address         String @db.VarChar(254)
   carts           cart[]
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   deletedAt       DateTime?
   deactivatedAt   DateTime?
   active          Boolean @default(true)
+  userType        String @db.VarChar(20) @default("user")
 }
 
 // Tabla de carritos
@@ -105,8 +110,11 @@ model cart {
   id              String @id @default(cuid())
   user            user @relation(fields: [userId], references: [id])
   userId          String
+  seller          seller @relation(fields: [sellerId], references: [id])
+  sellerId        String
   products        Json
-  status          String @db.VarChar(10)
+  total           Float
+  status          String @db.VarChar(10) @default("created")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   deletedAt       DateTime?

@@ -5,6 +5,7 @@ const { seller } = new PrismaClient();
 async function updateSeller(req, res){ 
 
     const data = req.body;
+    delete data.userId;
     const { id } = req.params;
     
     if (id === "" || id === undefined) {
@@ -15,7 +16,7 @@ async function updateSeller(req, res){
     } else {
         await seller.update({
             where: {
-                id: id
+                id: id,
             },
             data,
             select: {

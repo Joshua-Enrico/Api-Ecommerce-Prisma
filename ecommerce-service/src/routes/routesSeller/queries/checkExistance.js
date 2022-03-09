@@ -19,7 +19,7 @@ async function checkSellerExistance(sellerArgs, res){
         if(user && user.length > 0){
             flag.isValid = false;
             res.status(201).json({
-                message: "name or email already exist",
+                message: "name  already exist",
                 code: "name_or_email_exist",
             })
         }

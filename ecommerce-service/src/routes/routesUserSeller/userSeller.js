@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     const validArgs = [ "sellerId", "name", "password", "email"]
     const err = dinamycVal(req.body, res, validArgs, 4, errUsrSellerMsg, false);// Valida los argumentos
     if (!err) {
-        const flag = await checkUserExistance(req.body, res);// Verifica que el name y email no existan
+        const flag = await chekWarehouseExistance(req.body, res);// Verifica que el name y email no existan
         flag.isValid && createSellerUser(req.body, res); // Si no existe el name y email, crea el admin
     }
 
