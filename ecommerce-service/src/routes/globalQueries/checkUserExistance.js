@@ -1,10 +1,14 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-/*  Verifica si el email o name ya existe
-    Como estamos usando tablas especificas para tipo de usuario
-    Estoy que manejo un queryraw para validar la existencia en las 3 tablas
-    con eso evitamos hacer 3 querys independientes a cada tabla*/
+/**
+ * 
+ * @param {*} req express request object
+ * @param {*} res express response object
+ * @returns { isValid: boolean} isValid: boolean
+ * @description check if user exists in database
+ * if not return false and http response with error message
+ */
 async function checkUserExistance(req, res) {
 
     const { email, name } = req;

@@ -13,9 +13,15 @@ const { errMessages } = require('../utils/messages');
 const { dinamycVal } = require('../globalValidations/dinamycArgsValidation');
 const { verifyTokenAdmin } = require('../../authMiddleware/accessVerification');
 
-/*  Crea un nuevo admin, esta ruta esta protegida
-    por el middleware de autenticacion
-*/
+/**
+ * @description Endpoint para crear un nuevo admin
+ * @param {object} req - Request object
+ * @param {object} res - Response object
+ * @function verifyTokenAdmin - Verifica que el token sea valido
+ * @function dinamycVal - Valida los datos que se reciben
+ * @function checkUserExistance - Verifica que el usuario no exista en la base de datos
+ * @function createUser - Crea un nuevo usuario en la base de datos
+ */
 router.post('/',verifyTokenAdmin, async (req, res) => {
 
     const validArgs = ["name", "email", "password"];
@@ -27,19 +33,40 @@ router.post('/',verifyTokenAdmin, async (req, res) => {
 
 })
 
-/* Lista de todos los usuarios */
+
+/**
+ * @description Endpoint para obtener todos los admins
+ * @param {object} req - Request object
+ * @param {object} res - Response object
+ * @function verifyTokenAdmin - Verifica que el token sea valido
+ * @function getAllAdmins - Obtiene todos los admins desde la base de datos
+ */
 router.get('/all',verifyTokenAdmin, (req, res) => {
 
     getAllAdmins(res);// Esta funcion maneja el query y response
 })
 
-/* Elimina un usuario admin por id */
+
+/**
+ * @description Endpoint para eliminar un admin por id
+ * @param {object} req - Request object
+ * @param {object} res - Response object
+ * @function deleteAdmin - Elimina un admin de la base de datos
+ */
 router.delete('/:id', verifyTokenAdmin , (req, res) => {
 
     deleteAdmin(req, res);// El response se maneja dentro de la funcion
 })
 
-// Actualiza un usuario admin por id
+
+/**
+ * @description Endpoint para buscar un admin por id
+ * @param {object} req - Request object
+ * @param {object} res - Response object
+ * @function verfiyTokenAdmin - Verifica que el token sea valido
+ * @function updateArgsV - Valida los argumentos que se reciben
+ * @function updateAdmin - Actualiza un admin en la base de datos
+ */
 router.put('/:id', verifyTokenAdmin, (req, res) => {
     const err = updateArgsV(req, res);// Valida los argumentos
     if (!err.flagErr) {
@@ -47,7 +74,13 @@ router.put('/:id', verifyTokenAdmin, (req, res) => {
     }
 })
 
-/* Busca un usuario por ocurrencia de nombre, email */
+/**
+ * @description Endpoint para buscar un admin por parametro
+ * de busqueda
+ * @param {object} req - Request object
+ * @param {object} res - Response object
+ * @function verfiyTokenAdmin - Verifica que el token sea tipo admin
+ */
 router.get('/search/:search', verifyTokenAdmin, (req, res) => {
     searchAdmin(req, res);// El response se maneja dentro de la funcion
 })

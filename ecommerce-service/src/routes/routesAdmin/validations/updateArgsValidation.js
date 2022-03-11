@@ -1,6 +1,16 @@
 const { validateByDict } = require("../../utils/iterations");
 const { errUpdateMsg } = require("../../utils/messages");
 
+/**
+ * @description Verifica que los argumentos sean validos
+ * @param {object} req - Request object
+ * @param {object} res - Response object
+ * @returns {boolean} flag
+ * @const {object} dict - Objeto que contiene los argumentos
+ * @const {number} argsQty - Cantidad de argumentos
+ * @var {boolean} flagErr - Flag para indicar si hay error
+ * @const {list} validArgs - Lista de argumentos validos
+ */
 function updateArgsV(req, res) {
     const args = req.body; // Obtenemos los argumentos del body
     const validArgs = ["name", "email", "active"]; // lista de argumentos permitidos

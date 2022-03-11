@@ -2,7 +2,12 @@ var CryptoJS = require("crypto-js");// Libreria para encriptamiento de contrase√
 const { PrismaClient } = require('@prisma/client'); // ORM
 const { admin } = new PrismaClient();
 
-// Crea un usuario Administrador
+/**
+ * @description Crea un nuevo admin
+ * en la base de datos
+ * @param {*} req - Request object 
+ * @param {*} res - Response object
+ */
 async function createUser(req, res) {
   const { name, email, password } = req;
 

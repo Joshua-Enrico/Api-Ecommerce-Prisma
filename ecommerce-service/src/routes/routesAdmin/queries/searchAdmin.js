@@ -1,8 +1,12 @@
 const { PrismaClient } = require('@prisma/client');
 const { admin } = new PrismaClient();
 
-/*  Esta funcion hara una busqueda de admins por ocurrencia de nombre y email
-    Cualquier ocurrencia en nombre o email sera retornado */
+/**
+ * @description Busca admin por parametro de busqueda
+ * @param {*} req - Request object
+ * @param {*} res - Response object
+ * @const {string} search - Parametro de busqueda
+ */
 async function searchAdmin(req, res) {
     const search = req.params.search;
     if (!search || search === "" || typeof search !== "string") {

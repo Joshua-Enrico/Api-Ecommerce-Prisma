@@ -4,25 +4,26 @@ const prisma = new PrismaClient();
 var jwt = require('jsonwebtoken');
 
 
-/*  Verifica si el email o name ya existe
-    Como estamos usando tablas especificas para tipo de usuario
-    Estoy que manejo un queryraw para validar la existencia en las 3 tablas
-    con eso evitamos hacer 3 querys independientes a cada tabla*/
-    async function validateUser(req, res) {
+/**
+ * @description Valida un usuario y genera un token de autenticacion
+ * @param {*} req - Request object
+ * @param {*} res - Response object
+ */
+async function validateUser(req, res) {
 
-        const { email, password } = req.body;
-        console.log(email);
-    
-        await prisma.$queryRaw`
+    const { email, password } = req.body;
+    console.log(email);
+
+    await prisma.$queryRaw`
             SELECT id, name, password, email, userType FROM admin WHERE email = ${email}
             union SELECT id, name, password, email, userType FROM user WHERE email = ${email} 
             union SELECT id, name, password, email, userType FROM selleruser WHERE email = ${email}`
         .then((user) => {
-            if(user.length > 0){
+            if (user.length > 0) {
 
                 if (user[0].password === CryptoJS.SHA256(password).toString()) {
                     const { password, ...result } = user[0];
-                    const { id , userType } = result;
+                    const { id, userType } = result;
 
                     console.log(process.env.JWTSALT);
 
@@ -59,6 +60,6 @@ var jwt = require('jsonwebtoken');
                 err,
             });
         })
-    }
+}
     
 module.exports = { validateUser };

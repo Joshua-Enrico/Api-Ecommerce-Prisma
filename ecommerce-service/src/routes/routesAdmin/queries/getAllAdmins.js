@@ -1,7 +1,11 @@
 const { PrismaClient } = require('@prisma/client');
 const { admin } = new PrismaClient();
 
-// Retornamos la lista de todos los administradores
+/**
+ * @description Obtiene todos los admins
+ * de la base de datos
+ * @param {*} res - Response object
+ */
 async function getAllAdmins(res){
 
     await admin.findMany({

@@ -7,9 +7,12 @@ const router = require('express').Router();
 
 
 
-/*  Login de usuario , al manejar tablas
-    separadas para los tipos de usuarios 
-     */
+/**
+ * @description Endpoint para login de usuario
+ * @param {*} req - Request object
+ * @param {*} res - Response object
+ * @function validateUser - Valida usuario
+ */
 router.post('/login/', (req, res) => {
 
     validateUser(req, res);

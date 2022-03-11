@@ -1,6 +1,11 @@
 const { PrismaClient } = require('@prisma/client');
 const { admin } = new PrismaClient();
 
+/**
+ * @description Elimina un admin de la base de datos
+ * @param {*} req - Request object
+ * @param {*} res - Response object
+ */
 async function deleteAdmin(req, res){
     const { id } = req.params;
     await admin.delete({

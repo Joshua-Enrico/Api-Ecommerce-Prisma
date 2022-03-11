@@ -1,6 +1,13 @@
 const jwt = require('jsonwebtoken');
 
-
+/**
+ * @example
+ * // return http response if token is not valid
+ * @param {*} req express request object
+ * @param {*} res express response object
+ * @param {*} next next function
+ * @description verify token and set authData to req object
+ */
 const verifyToken = (req, res, next) => {
 
     const authHeader = req.headers.token;
@@ -27,6 +34,16 @@ const verifyToken = (req, res, next) => {
 
 }
 
+/**
+ * @example
+ * return http response if token is not valid 
+ * or user is not admin
+ * @param {*} req express request object
+ * @param {*} res express response object
+ * @param {*} next next function
+ * @description verify token, return http response if 
+ * token is not valid, continue if user is admin
+ */
 const verifyTokenAdmin = (req, res, next) => {
 
     verifyToken(req, res, () => {
@@ -44,6 +61,15 @@ const verifyTokenAdmin = (req, res, next) => {
 
 }
 
+
+/**
+ * 
+ * @param {*} req express request object
+ * @param {*} res express response object
+ * @param {*} next next function
+ * @description verify token, return http response if
+ * token is not valid, continue if user is seller or admin
+ */
 const verifyTokenSeller = (req, res, next) => {
 
         verifyToken(req, res, () => {
@@ -59,6 +85,14 @@ const verifyTokenSeller = (req, res, next) => {
         });
 }
 
+/**
+ * 
+ * @param {*} req express request object
+ * @param {*} res express response object
+ * @param {*} next next function
+ * @description verify token, return http response if
+ * token is not valid, continue if user is buyer or admin
+ */
 const verifyTokenUser = (req, res, next) => {
 
     verifyToken(req, res, () => {

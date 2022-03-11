@@ -1,6 +1,13 @@
 const { PrismaClient } = require('@prisma/client');
 const { admin } = new PrismaClient();
 
+/**
+ * @description Actualiza un admin en la base de datos
+ * @param {*} req - Request object
+ * @param {*} res - Response object
+ * @const {object} data - Objeto que contiene los datos
+ *  a actualizar
+ */
 async function updateAdmin(req, res){
     const data = req.body;
     await admin.update({

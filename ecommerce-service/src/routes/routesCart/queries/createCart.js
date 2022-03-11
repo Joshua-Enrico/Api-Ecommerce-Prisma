@@ -2,11 +2,15 @@ const { PrismaClient } = require('@prisma/client'); // ORM
 const { cart, product } = new PrismaClient();
 const prisma = new PrismaClient();
 
+
+/**
+ * @description crea un carrito
+ * @param {*} req - Request object
+ * @param {*} res - Response object
+ */
 async function createCart(req, res){
 
     const { usrSellerID, sellerId , products, total } = req.body;
-
-
 
     // craeting transaction
     let transaction = []

@@ -2,7 +2,11 @@ const { PrismaClient } = require('@prisma/client'); // ORM
 const { cart } = new PrismaClient();
 const prisma = new PrismaClient();
 
-
+/**
+ * @description Obtiene todos los carritos
+ * @param {*} req - Request object 
+ * @param {*} res - Response object
+ */
 async function getAllCarts(req, res) {
 
     await cart.findMany({

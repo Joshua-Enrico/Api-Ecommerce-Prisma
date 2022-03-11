@@ -1,7 +1,17 @@
 const { validateByDict, validateByDictProduct, validateByDictCart } = require("../utils/iterations");
 
 
-// Valida argumentos dinamicamente
+/**
+ * 
+ * @param {*} data 
+ * @param {*} res express response object
+ * @param {*} validArgs list of valid arguments
+ * @param {*} validQTY Quantity of valid arguments
+ * @param {*} errMsgs dictionary of error messages
+ * @param {*} flag to specify if flexible validation
+ * @param {*} validationType model type validation
+ * @returns flag
+ */
 function dinamycVal(data, res, validArgs, validQTY, errMsgs, flag, validationType){
     const dict = JSON.parse(JSON.stringify(data));
     const argsQty = Object.keys(dict).length;

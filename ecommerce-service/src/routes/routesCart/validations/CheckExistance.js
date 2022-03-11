@@ -1,6 +1,16 @@
 const { PrismaClient } = require('@prisma/client'); // ORM
 const { user, cart, seller } = new PrismaClient();
 
+
+/**
+ * @description Verifica que el id de seller y producto existan
+ * @param {*} req - Request object
+ * @param {*} res - Response object
+ * @const {string} sellerId - Id de seller
+ * @const {object} products - Objeto con los productos
+ * @const {bolean} isValid - Flag para indicar si hay error
+ * @returns flag - Objeto con el resultado de la validacion
+ */
 async function checkExistanceUS(req, res){
 
     const { usrSellerID, sellerId, products } = req.body;
